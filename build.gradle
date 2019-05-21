@@ -1,0 +1,41 @@
+group 'com.gutsol.da'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
+    }
+}
+apply plugin: 'java'
+//apply plugin: 'antlr'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.antlr:antlr4:4.7.1"
+    compile "org.antlr:antlr4-runtime:4.7.1"
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+    compile group: 'com.google.guava', name: 'guava', version: '27.1-jre'
+    testCompile 'junit:junit:4.12'
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'com.gutsol.da.FileTransformer'
+    }
+}
+
+//generateGrammarSource {
+//    maxHeapSize = "64m"
+//    arguments += ['-package', 'com.gutsol.da.parser']
+//    outputDirectory = new File("src/main/java/com/gutsol/da/parser".toString())
+//}
+//compileJava.dependsOn generateGrammarSource
